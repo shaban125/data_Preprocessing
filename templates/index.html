@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cleaning and Preprocessing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .file-input, .option-input {
+            margin: 20px 0;
+        }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #5cb85c;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+        .visualization-section {
+            margin-top: 20px;
+        }
+        .flash-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Data Cleaning and Preprocessing App</h2>
+
+        <!-- Form for file upload and cleaning options -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <!-- File Upload Section -->
+            <div class="file-input">
+                <label for="file">Upload Your CSV File:</label>
+                <input type="file" name="file" accept=".csv" required>
+            </div>
+
+            <!-- Data Cleaning Options -->
+            <div class="option-input">
+                <h3>Select Cleaning and Preprocessing Options:</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="cleaning_options" value="handle_missing_values"> Handle Missing Values</label>
+                    <label><input type="checkbox" name="cleaning_options" value="remove_duplicates"> Remove Duplicate Rows</label>
+                    <label><input type="checkbox" name="cleaning_options" value="normalize_data"> Normalize/Scale Data</label>
+                    <label><input type="checkbox" name="cleaning_options" value="handle_outliers"> Handle Outliers</label>
+                </div>
+            </div>
+
+            <!-- Data Visualization Options -->
+            <div class="option-input">
+                <h3>Select Graphs to Generate:</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="visualization_options" value="histogram"> Histogram</label>
+                    <label><input type="checkbox" name="visualization_options" value="scatter_plot"> Scatter Plot</label>
+                    <label><input type="checkbox" name="visualization_options" value="box_plot"> Box Plot</label>
+                    <label><input type="checkbox" name="visualization_options" value="correlation_heatmap"> Correlation Heatmap</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn">Upload and Process</button>
+        </form>
+
+        <!-- Flash Message Section -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-message">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
